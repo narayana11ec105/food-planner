@@ -1,4 +1,4 @@
-package com.food.planner.services;
+package com.food.planner.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import com.food.planner.dao.RecipeRepositry;
 import com.food.planner.models.CookBook;
 import com.food.planner.models.Recipe;
+import com.food.planner.services.RecipeService;
 
 import lombok.extern.slf4j.Slf4j;
 

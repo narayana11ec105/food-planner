@@ -15,29 +15,19 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table
+@Table(name="meal")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item {
+public class Meal {
 	
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Integer id;
 	
 	@Column
-	private String name;
-	
-	@Column
-	private Integer cost;
-	
-	@Column
-	private Integer quantity;
+	private Long recipeId;
 	
     @Enumerated(EnumType.ORDINAL)
-	private ItemType type;
-    
-    //How many days once this purchase is done, null for non perishable
-    @Column
-    private Integer purchaseFrequency;
+	private MealType mealType;
 }

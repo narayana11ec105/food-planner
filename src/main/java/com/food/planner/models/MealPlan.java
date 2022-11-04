@@ -1,5 +1,6 @@
 package com.food.planner.models;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,25 +10,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="recipe")
+@Table(name="meal_plan")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Recipe {
+public class MealPlan {
 	
-	@Id  
-    @GeneratedValue
-	Long id;
-	
-	@Column  
-	private String name;
+	@Id
+	@GeneratedValue
+	@Column
+	private Long id;
 	
     @OneToMany(cascade = CascadeType.ALL)
-	private List<Item> items;
+	private List<Meal> meals;
+	
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    @Column
+	private Date mealPlanDay;
 }

@@ -12,7 +12,13 @@ public enum ItemType {
 		public boolean isPerishable() {
 			return true;
 		}
-	}, 
+	},
+	DAIRY{
+		@Override
+		public boolean isPerishable() {
+			return false;
+		}
+	},
 	OTHER{
 		@Override
 		public boolean isPerishable() {
