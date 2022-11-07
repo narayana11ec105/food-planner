@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Manage Recipes</title>
+<meta name="keywords" content="free design template, download web templates, Fruit And Juice Website, XHTML, CSS" />
+<meta name="description" content="Fruit And Juice - Free CSS Template, Free XHTML CSS Design Layout" />
+<link href="recipe_templetamo.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="css/recipe.css" />
+<script type="text/javascript" src="highslide/highslide-with-gallery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+	hs.graphicsDir = 'highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.wrapperClassName = 'dark borderless floating-caption';
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = .75;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',x
+		interval: 5000,
+		repeat: false,
+		useControls: true,
+		fixedControls: 'fit',
+		overlayOptions: {
+			opacity: .6,
+			position: 'bottom center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+<style>
+
+caption {
+    font-size: 20px;
+    padding-bottom: 10px;
+    color: blueviolet;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: separate;
+  width: 100%;
+  align-self: right;
+  position: relative;
+  top: -300px;
+  left: 30px;
+  margin: -150px 0 -200px 100px;
+  table-layout: fixed;
+}
+
+td {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 10px;
+  font-size: 15px;
+}
+
+th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 10px;
+  font-size: 15px;
+}
+
+#item-header {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 10px;
+  font-size: 18px;
+}
+
+#main-header{
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 12px;
+  font-size: 20px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+  font-size: 15px;
+}
+
+h1 {
+  color: maroon;
+  margin-left: 40px;
+}
+
+tbody {
+    height:100px;
+    overflow-y: auto;    
+    overflow-x: hidden;
+}
+</style>
+
+<script type="text/javascript" language = "javascript">
+ window.onload=function(){
+    var button = document.getElementById('get-recipes-button');
+button.addEventListener("click", handler);
+}
+
+async function handler(){
+    var response_json
+
+    try { 
+     const response = await fetch('http://localhost:8080/recipes', {
+      method: 'get'
+    }).then((response) => response.json())
+      .then((data) => response_json = data);
+    console.log('Completed!', response_json);
+    } catch(err) {
+        console.error(`Error: ${err}`);
+    }
+
+    const recipes = response_json.recipes;
+    console.log("JSON array", recipes)
+    buildTable(recipes)
+}
+
+function buildTable(data){
+		var table = document.getElementById('myTable')
+		for (var i = 0; i < data.length; i++){
+            var row_head = `<tr><th id="item-header">${data[i].dish}</th></tr>`
+            table.innerHTML +=row_head
+            for (var j = 0; j < data[i].items.length; j++){
+            console.log("Fields ", data[i].name, data[i].items[j])
+			var row = `<tr>
+                            <td></td>
+                            <th>${data[i].items[j].name}</th>
+							<td>${data[i].items[j].cost}</td>
+                            <td>${data[i].items[j].quantity}</td>
+							<td>${data[i].items[j].type}</td>
+							<td>${data[i].items[j].purchaseFrequency}</td>
+					  </tr>`
+			table.innerHTML += row
+            }
+		}
+
+    console.log("Built the table", table)
+    }
+</script>
+
+</head>
+<body>
+<h1>Manage Your Recipes</h1>
+    <div id="templatemo_container">
+    <!--  Free CSS Templates by TemplateMo.com  -->
+    	<div id="templatemo_header">
+        	<div id="templatemo_menu">
+				<ul>
+                    <li><a href="index.html" class="current">Home Page</a></li>
+                </ul>
+                    <button id="get-recipes-button">View Recipes</button>
+                    <h1 id="demo"></h1>
+                <ul>
+                  	<li><a href="create_recipe.html">Create Recipes</a></li>
+                  	<li><a href="#">Update a Recipe</a></li>
+                    <li><a href="#">Delete a Recipe</a></li>
+            	</ul>
+			</div>
+        </div>
+        <table table table-hover>
+            <caption>
+                The Table of Recipes Available
+            </caption>
+            <thead>
+                <tr>
+                    <td></td>
+                    <th id="main-header" scope="col">
+                        Item Name
+                    </th>
+                    <th id="main-header" scope="col">
+                        Item Cost
+                    </th>
+                    <th id="main-header" scope="col">
+                        Quantity
+                    </th>
+                    <th id="main-header" scope="col">
+                        Shelf Life
+                    </th>
+                    <th id="main-header" scope="col">
+                        Frequency Of Purchase
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="myTable"></tbody>
+        </table>
+    </body>
+</html>

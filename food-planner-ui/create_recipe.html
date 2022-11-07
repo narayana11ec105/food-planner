@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Manage Recipes</title>
+<meta name="keywords" content="free design template, download web templates, Fruit And Juice Website, XHTML, CSS" />
+<meta name="description" content="Fruit And Juice - Free CSS Template, Free XHTML CSS Design Layout" />
+<link href="recipe_templetamo.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="css/recipe.css" />
+<script type="text/javascript" src="highslide/highslide-with-gallery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+	hs.graphicsDir = 'highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.wrapperClassName = 'dark borderless floating-caption';
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = .75;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',x
+		interval: 5000,
+		repeat: false,
+		useControls: true,
+		fixedControls: 'fit',
+		overlayOptions: {
+			opacity: .6,
+			position: 'bottom center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+
+*, body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+    height: 100%;
+    background: url(images/add-recipe-background.jpg) #faf8e1 no-repeat; 
+    overflow: hidden;
+}
+
+
+.form-holder {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+      border: #2acc80;
+}
+
+.form-holder .form-content {
+    position: relative;
+    text-align: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 60px;
+}
+
+.form-content .form-items {
+    border: 3px solid #fff;
+    padding: 40px;
+    display: inline-block;
+    width: 100%;
+    min-width: 540px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-align: left;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.form-content h3 {
+    color: red
+    text-align: left;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-content h3.form-title {
+    margin-bottom: 30px;
+}
+
+.form-content p {
+    color: #fff;
+    text-align: left;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 20px;
+    margin-bottom: 30px;
+}
+
+
+.form-content label, .was-validated .form-check-input:invalid~.form-check-label, .was-validated .form-check-input:valid~.form-check-label{
+    color: #fff;
+}
+
+.form-content input[type=text], .form-content input[type=password], .form-content input[type=email], .form-content select {
+    width: 100%;
+    padding: 9px 20px;
+    text-align: left;
+    border: 0;
+    outline: 0;
+    border-radius: 6px;
+    background-color: #fff;
+    font-size: 15px;
+    font-weight: 300;
+    color: #8D8D8D;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    margin-top: 16px;
+}
+
+
+.btn-primary{
+    background-color: #6C757D;
+    outline: none;
+    border: 0px;
+     box-shadow: none;
+     padding: 10px ;
+     margin: 20px;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
+    background-color: #495056;
+    outline: none !important;
+    border: none !important;
+     box-shadow: none;
+}
+
+.btn-primary-01{
+    background-color: orange;
+    outline: none;;
+    border: 0px;
+    box-shadow: none;
+    padding: 10px ;
+    margin: -55px 20px 0 300px;
+}
+
+.btn-primary-01:hover, .btn-primary-01:focus, .btn-primary-01:active{
+    background-color: orangered;
+    outline: none !important;
+    border: none !important;
+     box-shadow: none;
+}
+
+.form-content textarea {
+    position: static !important;
+    width: 100%;
+    padding: 8px 20px;
+    border-radius: 6px;
+    text-align: left;
+    background-color: #fff;
+    border: 0;
+    font-size: 15px;
+    font-weight: 300;
+    color: #8D8D8D;
+    outline: none;
+    resize: none;
+    height: 120px;
+    -webkit-transition: none;
+    transition: none;
+    margin-bottom: 14px;
+}
+
+.form-content textarea:hover, .form-content textarea:focus {
+    border: 0;
+    background-color: #ebeff8;
+    color: #8D8D8D;
+}
+
+.mv-up{
+    margin-top: -9px !important;
+    margin-bottom: 8px !important;
+}
+
+.invalid-feedback{
+    color: #ff606e;
+}
+
+.valid-feedback{
+   color: #2acc80;
+}
+
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+}
+</style>
+<script type="text/javascript" language = "javascript">
+    var items = []
+    var cookbook = {}    
+    //const createRecipeForm = document.getElementById("add-item-form");
+    //exampleForm.addEventListener("submit", postRecipeToServer);
+
+//Prepare the json
+window.onload=function(){
+    const addItemForm = document.getElementById("add-item-form");
+    addItemForm.addEventListener('submit', addItem);
+    const createItemForm = document.getElementById("create-item-form");
+    createItemForm.addEventListener('submit', createRecipe);
+
+    function addItem(event) {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        items.push(Object.fromEntries(data.entries()));
+
+        //console.log('The JSON', items)
+
+        //var items = [] 
+        var recipes = []
+        for (let i = 0; i < items.length; i++) {
+
+            console.log("Inside loop " + i)
+
+            var item = {
+                "name" : items[i].name,
+                "cost" : items[i].cost,
+                "quantity": items[i].quantity,
+                "type": items[i].type,
+                "purchaseFrequency": items[i].purchaseFrequency
+            }
+
+            indexOfRecipe = recipes.findIndex(e => e.name === items[i].recipeName)
+            console.log("indexOfRecipe ", indexOfRecipe, recipes[indexOfRecipe], item)
+
+            if (indexOfRecipe > -1) {
+                 recipes[indexOfRecipe].items.push(item)
+            } else {
+                current_items = []
+                current_items.push(item)
+                var recipe = {
+                        "dish" : items[i].recipeName,
+                        "items" : current_items
+                }
+
+                recipes.push(recipe)
+            }
+        }
+
+         cookbook = {
+            recipes
+        }
+        console.log("cookbook ", JSON.stringify(cookbook))
+    }
+
+    function createRecipe(event) {
+        event.preventDefault();
+        try {
+        fetch('http://localhost:8080/recipes', {
+             method: 'POST',
+             headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                 },
+            body: JSON.stringify(cookbook)
+        })
+        .then(response => alert('The recipes have been stored successfully'))
+        } catch(err) {
+         console.error(`Error: ${err}`);
+        }
+    }
+}
+</script>
+</head>
+<body>
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Add Your Item</h3>
+                        <p>Fill in the data below.</p>
+                        <form id="add-item-form" class="requires-validation" novalidate>
+
+                            <div class="col-md-12">
+                                <input class="form-control" type="text" name="recipeName" placeholder="Recipe Name" required autocomplete="on">
+                             </div>
+
+                            <div class="col-md-12">
+                               <input class="form-control" type="text" name="name" placeholder="Ingredient" required autocomplete="off">
+                            </div>
+
+                            <div class="col-md-12">
+                                <input class="form-control" type="text" name="cost" placeholder="Cost in rupees" required autocomplete="off">
+                            </div>
+
+                            <div class="col-md-12">
+                                <input class="form-control" type="text" name="quantity" placeholder="Quantity in Kgs" required autocomplete="off">
+                            </div>
+
+                            <div class="col-md-12">
+                                <input class="form-control" type="text" name="purchaseFrequency" placeholder="How often do you want to purchase?" required autocomplete="off">
+                            </div>
+                            <div class="col-md-12">
+                                <select class="form-select mt-3" name="type" required>
+                                      <option selected disabled value="">Item type</option>
+                                      <option value="VEGETABLE">VEGETABLE</option>
+                                      <option value="DAIRY">DAIRY</option>
+                                      <option value="FRUIT">FRUIT</option>
+                                      <option value="GRAIN">GRAIN</option>
+                                      <option value="OTHER">OTHER</option>
+                               </select>
+                            <div class="form-button mt-3">
+                                <button id="add-item" name="add-item" class="btn btn-primary" type="submit">Add Item</button>
+                            </div>
+                        </form>
+                        <form id="create-item-form" novalidate>
+                            <div class="form-button mt-3">
+                                <button id="create-item" name="add-item" class="btn btn-primary" type="submit">Create Your Recipe!</button>
+                            </div>
+                        </form>
+                        <button class="btn btn-primary" onclick="location.href='recipe.html'" type="button">Go Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>      
+</body>
+</html>
