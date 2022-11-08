@@ -73,9 +73,19 @@ th {
   font-size: 18px;
 }
 
+#header-td {
+  border: 1px solid #dddddd;
+  text-align: center;
+  font-family: Lucida Console;
+  font-weight: bold;
+  padding: 12px;
+  font-size: 20px;
+}
+
 #main-header{
   border: 1px solid #dddddd;
   text-align: center;
+  font-family: Lucida Console;
   padding: 12px;
   font-size: 20px;
 }
@@ -86,14 +96,27 @@ tr:nth-child(even) {
 }
 
 h1 {
-  color: maroon;
-  margin-left: 40px;
+  padding: 100px 0px -100px 0px;
+  text-align: center;
+  color: green;
+  font-size: 60px;
+  font-family: 'Brush Script MT', cursive;
+  margin: 50px;
 }
 
 tbody {
     height:100px;
     overflow-y: auto;    
     overflow-x: hidden;
+}
+
+caption {
+    text-align: center;
+    color: green;
+    font-family: Monaco;
+    font-weight: bold;
+    font-size: 25px;
+    padding: 10px 10px 10px 10px;
 }
 </style>
 
@@ -155,7 +178,7 @@ function buildTable(data){
                     <li><a href="index.html" class="current">Home Page</a></li>
                 </ul>
                     <button id="get-recipes-button">View Recipes</button>
-                    <h1 id="demo"></h1>
+                    <h2 id="demo"></h2>
                 <ul>
                   	<li><a href="create_recipe.html">Create Recipes</a></li>
                   	<li><a href="#">Update a Recipe</a></li>
@@ -169,7 +192,9 @@ function buildTable(data){
             </caption>
             <thead>
                 <tr>
-                    <td></td>
+                    <td id="header-td">
+                        Dish
+                    </td>
                     <th id="main-header" scope="col">
                         Item Name
                     </th>

@@ -3,7 +3,9 @@ CSS Credit: http://www.templatemo.com
 */
 
 html {
-	background: url(images/recipe_page_background.png) #faf8e1 repeat-x;
+	background: url(images/recipe-page-background.png) #faf8e1 no-repeat; 
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 body {
@@ -14,7 +16,6 @@ body {
 	line-height: 1.5em;
 	width: 100%;
 	display: table;
-	background-size: cover;
 }
 
 a:link, a:visited {	color: #f26521; text-decoration:none; }
@@ -32,13 +33,13 @@ a:active, a:hover { color: #f26521; text-decoration: underline; }
 
 #templatemo_menu {
 	float: left;
-	width: 300px;
-	margin: 200px 60px 0 30px;
+	width: 152px;
+	margin: 200px 0 0 30px;
 	padding: 0;
 }
 
 #templatemo_menu ul {
-	float: right;
+	float: left;
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -46,38 +47,31 @@ a:active, a:hover { color: #f26521; text-decoration: underline; }
 
 #templatemo_menu li a {
 	display: block;
-	width: 500px;
-	height: 50px;
+	width: 130px;
+	height: 21px;
 	color: #aba000;
 	background: url(images/templatemo_menu.jpg) no-repeat;
 	font-family: Tahoma;
 	font-size: 15px;
-	margin: 8px -600px 70px 200px;
-	padding: 2px 30px 2px 30px;
-	
+	text-align: left;
+	margin: 0px 0 30px -100px;
+	padding: 2px 0 0 25px;
 }
 
 #templatemo_menu button {
 	display: block;
-	border: none;
-	width: 300px;
-	height: 50px;
+	width: 150px;
+	height: 21px;
 	color: #aba000;
 	background: url(images/templatemo_menu.jpg) no-repeat;
 	font-family: Tahoma;
 	font-size: 15px;
-	margin: 10px -1200px 50px 685px;
-	padding: 0px 200px 25px 0px;
-	
+	text-align: left;
+	margin: 0px 0 40px -100px;
+	padding: 2px 0 20px 30px;
 }
 
 #templatemo_menu li a:hover, #templatemo_menu li .current {
-	background: url(images/templatemo_menu_current.jpg) no-repeat;
-	color: #fff;
-	text-decoration: none;
-}
-
-#templatemo_menu button:hover, #templatemo_menu li .current {
 	background: url(images/templatemo_menu_current.jpg) no-repeat;
 	color: #fff;
 	text-decoration: none;
@@ -255,4 +249,23 @@ a:active, a:hover { color: #f26521; text-decoration: underline; }
 	height: 0;
 	margin: 0;
 	padding: 0;
+}
+
+#templatemo_menu button {
+	display: block;
+	border: none;
+	width: 300px;
+	height: 50px;
+	color: #aba000;
+	background: url(images/templatemo_menu.jpg) no-repeat;
+	font-family: Tahoma;
+	font-size: 15px;
+	margin: 0 0 -15px -100px;
+	padding: 0px 180px 25px 20px;	
+}
+
+#templatemo_menu button:hover, #templatemo_menu li .current {
+	background: url(images/templatemo_menu_current.jpg) no-repeat;
+	color: #fff;
+	text-decoration: none;
 }

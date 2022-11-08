@@ -3,7 +3,10 @@ CSS Credit: http://www.templatemo.com
 */
 
 html {
-	background: url(images/templatemo_bg.jpg) #faf8e1 repeat-x;
+	background: url(images/index.png) #faf8e1 no-repeat; 
+	background-repeat: no-repeat;
+	background-size: cover;
+	object-fit: fill;
 }
 
 body {
@@ -20,14 +23,13 @@ a:link, a:visited {	color: #f26521; text-decoration:none; }
 a:active, a:hover { color: #f26521; text-decoration: underline; }
 
 #templatemo_container {
-	width: 755px;
+	width: 800px;
 	margin: auto;
 }
 
 #templatemo_header {
 	width: 755px;
 	height: 395px;
-	background: url(images/templatemo_header.jpg) no-repeat;
 }
 
 #templatemo_menu {
@@ -46,8 +48,8 @@ a:active, a:hover { color: #f26521; text-decoration: underline; }
 
 #templatemo_menu li a {
 	display: block;
-	width: 122px;
-	height: 21px;
+	width: 200px;
+	height: 30px;
 	color: #aba000;
 	background: url(images/templatemo_menu.jpg) no-repeat;
 	font-family: Tahoma;

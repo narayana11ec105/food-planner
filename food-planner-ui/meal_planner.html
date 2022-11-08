@@ -5,7 +5,7 @@
 <title>Manage Recipes</title>
 <meta name="keywords" content="free design template, download web templates, Fruit And Juice Website, XHTML, CSS" />
 <meta name="description" content="Fruit And Juice - Free CSS Template, Free XHTML CSS Design Layout" />
-<link href="recipe_templetamo.css" rel="stylesheet" type="text/css" />
+<link href="meal_planner_templetamo.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="css/recipe.css" />
 <script type="text/javascript" src="highslide/highslide-with-gallery.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -56,6 +56,7 @@ td {
   border: 1px solid #dddddd;
   text-align: center;
   padding: 10px;
+  font-weight: light;
   font-size: 15px;
 }
 
@@ -75,7 +76,8 @@ th {
 
 #main-header{
   border: 1px solid #dddddd;
-  text-align: center;
+  text-align: left;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
   padding: 12px;
   font-size: 20px;
 }
@@ -86,8 +88,21 @@ tr:nth-child(even) {
 }
 
 h1 {
-  color: maroon;
-  margin-left: 40px;
+  padding: 100px 0px -100px 0px;
+  text-align: center;
+  color: green;
+  font-size: 60px;
+  font-family: 'Brush Script MT', cursive;
+  margin: 50px;
+}
+
+caption {
+    text-align: center;
+    color: green;
+    font-family: Monaco;
+    font-weight: bold;
+    font-size: 25px;
+    padding: 10px 10px 10px 10px;
 }
 
 tbody {
@@ -99,53 +114,58 @@ tbody {
 
 <script type="text/javascript" language = "javascript">
  window.onload=function(){
-    var button = document.getElementById('get-recipes-button');
+    var button = document.getElementById('get-meals-button');
 button.addEventListener("click", handler);
 }
 async function handler(){
     var response_json
-
+    var recipes_json
     try { 
-     const response = await fetch('http://localhost:8080/recipes', {
+     const meals_response = await fetch('http://localhost:8080/meal-plans', {
       method: 'get'
-    }).then((response) => response.json())
+    }).then((meals_response) => meals_response.json())
       .then((data) => response_json = data);
     console.log('Completed!', response_json);
     } catch(err) {
         console.error(`Error: ${err}`);
     }
 
-    const recipes = response_json.recipes;
-    console.log("JSON array", recipes)
-    buildTable(recipes)
+    try { 
+     const recipes_response = await fetch('http://localhost:8080/recipes', {
+      method: 'get'
+    }).then((recipes_response) => recipes_response.json())
+      .then((data) => recipes_json = data);
+    console.log('Completed!', recipes_json);
+    } catch(err) {
+        console.error(`Error: ${err}`);
+    }
+
+    buildTable(response_json, recipes_json.recipes)
 }
 
-function buildTable(data){
+function buildTable(data, recipes){
 		var table = document.getElementById('myTable')
 		for (var i = 0; i < data.length; i++){
-            var row_head = `<tr><th id="item-header">${data[i].dish}</th></tr>`
+            console.log("Fields ", data[i].plannedForDay)
+            var row_head = `<tr><th id="item-header">${data[i].plannedForDay}</th></tr>`
             table.innerHTML +=row_head
-            for (var j = 0; j < data[i].items.length; j++){
-            console.log("Fields ", data[i].name, data[i].items[j])
+            for (var j = 0; j < data[i].meals.length; j++){
+            console.log("Recipes array", recipes)
+            let recipeFound = recipes.find(r => r.id === data[i].meals[j].recipeId);
 			var row = `<tr>
                             <td></td>
-                            <th>${data[i].items[j].name}</th>
-							<td>${data[i].items[j].cost}</td>
-                            <td>${data[i].items[j].quantity}</td>
-							<td>${data[i].items[j].type}</td>
-							<td>${data[i].items[j].purchaseFrequency}</td>
+							<td>${recipeFound.dish}</td>
+                            <td>${data[i].meals[j].mealType}</td>
 					  </tr>`
 			table.innerHTML += row
             }
 		}
-
-    console.log("Built the table", table)
     }
 </script>
 
 </head>
 <body>
-<h1>Manage Your Recipes</h1>
+<h1>Manage Your Meal Plans</h1>
     <div id="templatemo_container">
     <!--  Free CSS Templates by TemplateMo.com  -->
     	<div id="templatemo_header">
@@ -153,36 +173,29 @@ function buildTable(data){
 				<ul>
                     <li><a href="index.html" class="current">Home Page</a></li>
                 </ul>
-                    <button id="get-meal-plans-button">View Meal Plans</button>
-                    <h1 id="demo"></h1>
+                    <button id="get-meals-button">View Meal Plan</button>
+                    <h2 id="demo"></h2>
                 <ul>
-                  	<li><a href="create_meal_plan.html">Create a Meal Plan</a></li>
-                  	<li><a href="#">Update a Meal Plan</a></li>
-                    <li><a href="#">Delete a Meal Plan</a></li>
+                  	<li><a href="create_meal_plan.html">Create Meal Plan</a></li>
+                  	<li><a href="#">Update Meal Plan</a></li>
+                    <li><a href="#">Delete Meal Plan</a></li>
             	</ul>
 			</div>
         </div>
         <table>
             <caption>
-                The Table of Recipes Available
+                Meal Plans Available
             </caption>
             <thead>
                 <tr>
-                    <td></td>
+                    <td id="main-header">
+                        Planned Date
+                    </td>
                     <th id="main-header" scope="col">
-                        Item Name
+                        Meal Name
                     </th>
                     <th id="main-header" scope="col">
-                        Item Cost
-                    </th>
-                    <th id="main-header" scope="col">
-                        Quantity
-                    </th>
-                    <th id="main-header" scope="col">
-                        Shelf Life
-                    </th>
-                    <th id="main-header" scope="col">
-                        Frequency Of Purchase
+                        Meal Type
                     </th>
                 </tr>
             </thead>

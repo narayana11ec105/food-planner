@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Manage Recipes</title>
+<title>Manage Meal Plans</title>
 <meta name="keywords" content="free design template, download web templates, Fruit And Juice Website, XHTML, CSS" />
 <meta name="description" content="Fruit And Juice - Free CSS Template, Free XHTML CSS Design Layout" />
-<link href="recipe_templetamo.css" rel="stylesheet" type="text/css" />
+<link href="meal_planner_templetamo.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="css/recipe.css" />
 <script type="text/javascript" src="highslide/highslide-with-gallery.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -52,10 +52,8 @@ html, body {
 
 .form-holder {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+      align-items: left;
+      text-align: left;
       min-height: 100vh;
       border: #2acc80;
 }
@@ -112,7 +110,8 @@ html, body {
 
 
 .form-content label, .was-validated .form-check-input:invalid~.form-check-label, .was-validated .form-check-input:valid~.form-check-label{
-    color: #fff;
+    color: black;
+    font-size: 15px;
 }
 
 .form-content input[type=text], .form-content input[type=password], .form-content input[type=email], .form-content select {
@@ -131,6 +130,21 @@ html, body {
     margin-top: 16px;
 }
 
+.form-content input[type=date] {
+    width: 100%;
+    padding: 9px 20px;
+    text-align: left;
+    border: 0;
+    outline: 0;
+    border-radius: 6px;
+    background-color: #fff;
+    font-size: 13px;
+    font-weight: 300;
+    color: #8D8D8D;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    margin-top: 16px;
+}
 
 .btn-primary{
     background-color: #6C757D;
@@ -210,82 +224,121 @@ a.button {
     text-decoration: none;
     color: initial;
 }
-</style>
-<script type="text/javascript" language = "javascript">
-    var items = []
-    var cookbook = {}    
-    //const createRecipeForm = document.getElementById("add-item-form");
-    //exampleForm.addEventListener("submit", postRecipeToServer);
 
-//Prepare the json
-window.onload=function(){
-    const addItemForm = document.getElementById("add-item-form");
-    addItemForm.addEventListener('submit', addItem);
-    const createItemForm = document.getElementById("create-item-form");
-    createItemForm.addEventListener('submit', createRecipe);
-
-    function addItem(event) {
-        event.preventDefault();
-        const data = new FormData(event.target);
-        items.push(Object.fromEntries(data.entries()));
-
-        //console.log('The JSON', items)
-
-        //var items = [] 
-        var recipes = []
-        for (let i = 0; i < items.length; i++) {
-
-            console.log("Inside loop " + i)
-
-            var item = {
-                "name" : items[i].name,
-                "cost" : items[i].cost,
-                "quantity": items[i].quantity,
-                "type": items[i].type,
-                "purchaseFrequency": items[i].purchaseFrequency
-            }
-
-            indexOfRecipe = recipes.findIndex(e => e.name === items[i].recipeName)
-            console.log("indexOfRecipe ", indexOfRecipe, recipes[indexOfRecipe], item)
-
-            if (indexOfRecipe > -1) {
-                 recipes[indexOfRecipe].items.push(item)
-            } else {
-                current_items = []
-                current_items.push(item)
-                var recipe = {
-                        "dish" : items[i].recipeName,
-                        "items" : current_items
-                }
-
-                recipes.push(recipe)
-            }
-        }
-
-         cookbook = {
-            recipes
-        }
-        console.log("cookbook ", JSON.stringify(cookbook))
-    }
-
-    function createRecipe(event) {
-        event.preventDefault();
-        try {
-        fetch('http://localhost:8080/recipes', {
-             method: 'POST',
-             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-                 },
-            body: JSON.stringify(cookbook)
-        })
-        .then(response => alert('The recipes have been stored successfully'))
-        } catch(err) {
-         console.error(`Error: ${err}`);
-        }
-    }
+tr:nth-child(even) {
+  background-color: #dddddd;
+  font-size: 15px;
 }
 
+h1 {
+  color: maroon;
+  margin-left: 40px;
+}
+
+caption {
+    text-align: center;
+    color: green;
+    font-family: Monaco;
+    font-weight: bold;
+    font-size: 25px;
+    padding: 10px 10px 10px 10px;
+}
+
+tbody {
+    height:100px;
+    overflow-y: auto;    
+    overflow-x: hidden;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: separate;
+  width: 50%;
+  align-self: right;
+  position: relative;
+  top: -470px;
+  left: 700px;
+
+  margin: -150px 0 -200px 100px;
+}
+
+td {
+  border: 1px solid #dddddd;
+  color: black;
+  text-align: center;
+  padding: 10px;
+  font-weight: light;
+  font-size: 15px;
+}
+
+th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 10px;
+  font-size: 15px;
+}
+
+</style>
+<script type="text/javascript" language = "javascript">
+window.onload=function(){
+    const groceryCalculatorForm = document.getElementById("groc-calc-form");
+    groceryCalculatorForm.addEventListener('submit', calculateGrocery);
+
+async function calculateGrocery(event) {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        groc_query = Object.fromEntries(data.entries());
+
+        var grocery_query = {
+            "numberOfPersons": groc_query.numberOfPersons,
+            "startDate": groc_query.startDate,
+            "endDate": groc_query.endDate
+        }
+
+        const esc = encodeURIComponent;
+        const query = Object.keys(grocery_query).map(k => `${esc(k)}=${esc(grocery_query[k])}`).join('&')
+        console.log('Input dates: ', query)
+
+    //Fetch the groceries based on the input dates
+    var groceries
+    try { 
+     const groc_response = await fetch('http://localhost:8080/groceries?' + query, {
+      method: 'get'
+    }).then((groc_response) => groc_response.json())
+      .then((data) => groceries = data);
+    console.log('Completed!', groceries);
+    } catch(err) {
+        console.error(`Error: ${err}`);
+    }
+    console.log("The groceries: ", groceries)
+    buildTable(groceries)
+}
+
+function buildTable(groceries){
+		var table = document.getElementById('myTable')
+        var items = groceries.items
+
+        var itemsAdded = []
+
+		for (var i = 0; i < items.length; i++){
+            console.log("Fields ", items[i])
+            if(itemsAdded.indexOf(items[i].name) < 0){
+			var row = `<tr>
+							<td>${items[i].name}</td>
+                            <td>${items[i].cost}</td>
+							<td>${items[i].quantity}</td>
+							<td>${items[i].type}</td>
+                            <td>${items[i].purchaseFrequency}</td>
+					  </tr>`
+                      itemsAdded.push(items[i].name)
+                    }
+			table.innerHTML += row
+		}
+
+    console.log("Built the table", table)
+    }
+
+}
 </script>
 </head>
 <body>
@@ -294,52 +347,51 @@ window.onload=function(){
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
-                        <h3>Add Your Item</h3>
+                        <h3>Calculate Groceries</h3>
                         <p></p>
-                        <form id="add-item-form" class="requires-validation" novalidate>
-
-                            <div class="col-md-12">
-                                <input class="form-control" type="text" name="recipeName" placeholder="Recipe Name" required autocomplete="on">
-                             </div>
-
-                            <div class="col-md-12">
-                               <input class="form-control" type="text" name="name" placeholder="Ingredient" required autocomplete="off">
-                            </div>
-
-                            <div class="col-md-12">
-                                <input class="form-control" type="text" name="cost" placeholder="Cost in rupees" required autocomplete="off">
-                            </div>
-
-                            <div class="col-md-12">
-                                <input class="form-control" type="text" name="quantity" placeholder="Quantity in Kgs" required autocomplete="off">
-                            </div>
-
-                            <div class="col-md-12">
-                                <input class="form-control" type="text" name="purchaseFrequency" placeholder="How often do you want to purchase?" required autocomplete="off">
-                            </div>
-                            <div class="col-md-12">
-                                <select class="form-select mt-3" name="type" required>
-                                      <option selected disabled value="">Item type</option>
-                                      <option value="VEGETABLE">VEGETABLE</option>
-                                      <option value="DAIRY">DAIRY</option>
-                                      <option value="FRUIT">FRUIT</option>
-                                      <option value="GRAIN">GRAIN</option>
-                                      <option value="OTHER">OTHER</option>
-                               </select>
+                        <form id="groc-calc-form" novalidate>
+                            <label for="startDate">Select the Start date:</label>
+                            <input type="date" id="startDay" name="startDate">
+                            <br></br>
+                            <label for="endDate">Select the End day:</label>
+                            <input type="date" id="endDay" name="endDate">
+                            <br></br>
+                            <label for="people">Number of Persons to Serve?  </label>
+                            <input type="number" id="numberOfPersons" name="numberOfPersons" min="1">
                             <div class="form-button mt-3">
-                                <button id="add-item" name="add-item" class="btn btn-primary" type="submit">Add Item</button>
+                                <button id="calculate-groceries" name="groc-cal" class="btn btn-primary" type="submit">Go! Calculate Groceries!!</button>
                             </div>
                         </form>
-                        <form id="create-item-form" novalidate>
-                            <div class="form-button mt-3">
-                                <button id="create-item" name="add-item" class="btn btn-primary" type="submit">Create Your Recipe!</button>
-                            </div>
-                        </form>
-                        <button class="btn btn-primary" onclick="location.href='recipe.html'" type="button">Go Back</button>
+                        <button class="btn btn-primary" onclick="location.href='meal_planner.html'" type="button">Go Back</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>      
+    </div>
+    <table>
+        <caption>
+            Groceries
+        </caption>
+        <thead>
+            <tr>
+                <td id="main-header">
+                    Ingredient
+                </td>
+                <th id="main-header" scope="col">
+                    Total cost
+                </th>
+                <th id="main-header" scope="col">
+                    Total Quantity
+                </th>
+                <th id="main-header" scope="col">
+                    Ingredient Type
+                </th>
+                <th id="main-header" scope="col">
+                    Purchase Frequency
+                </th>
+            </tr>
+        </thead>
+        <tbody id="myTable"></tbody>
+    </table>  
 </body>
 </html>
