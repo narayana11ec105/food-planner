@@ -51,13 +51,13 @@ public class GroceryServiceImpl implements GroceryService{
 														    .collect(Collectors.groupingBy(Item::getName));
 		
 		List<Item> itemsCurated = items.entrySet().stream()
-												  .map(entry -> aggregateQuantity(entry.getValue()))
+												  .map(entry -> aggregateQuantity(entry.getValue(), groceryQuery.getNumberOfPersons()))
 												  .collect(Collectors.toList());
 		
 		return Groceries.builder().items(itemsCurated).build();
 	}
 	
-	private Item aggregateQuantity(List<Item> items) {
+	private Item aggregateQuantity(List<Item> items, int numberOfPersons) {
 		int totalQuantity = items.stream()
 								 .map(Item::getQuantity)
 								 .reduce(0, (a,b) -> a + b);
@@ -68,8 +68,8 @@ public class GroceryServiceImpl implements GroceryService{
 		
 		return Item.builder()
 				   .name(items.get(0).getName())
-				   .quantity(totalQuantity)
-				   .cost(totalCost)
+				   .quantity(totalQuantity * numberOfPersons)
+				   .cost(totalCost * numberOfPersons)
 				   .purchaseFrequency(items.get(0).getPurchaseFrequency())
 				   .type(items.get(0).getType())
 				   .build();
