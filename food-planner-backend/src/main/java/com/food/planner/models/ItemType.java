@@ -25,6 +25,12 @@ public enum ItemType {
 			return false;
 		}
 	},
+	MEAT{
+		@Override
+		public boolean isPerishable() {
+			return false;
+		}
+	},
 	OTHER{
 		@Override
 		public boolean isPerishable() {
